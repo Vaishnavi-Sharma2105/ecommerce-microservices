@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using UserService.Data;
+using UserService.Repositories;
+using UserService.Services;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer("Server=VAISHNAVI-PC;Database=ECommerceDb;Trusted_Connection=True;TrustServerCertificate=True"));
 
+// Add services to the container.
+builder.Services.AddScoped<IOrderRepos, OrderRepos>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
