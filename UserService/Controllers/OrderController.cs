@@ -3,11 +3,14 @@ using System.Net.WebSockets;
 using UserService.DTOs;
 using UserService.Models;
 using UserService.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UserService.Controllers
 {
+    
     [ApiController]
     [Route("api/orders")]
+    [Authorize]
     public class OrderController:ControllerBase
 
     {
