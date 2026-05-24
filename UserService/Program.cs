@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer("Server=VAISHNAVI-PC;Database=ECommerceDb;Trusted_Connection=True;TrustServerCertificate=True"));
-
+//JWT(Json Web Token) Service
+builder.Services.AddScoped<IJwtService, JwtService>();
 // Add services to the container.
 builder.Services.AddScoped<IOrderRepos, OrderRepos>();
 builder.Services.AddScoped<IOrderService, OrderService>();
