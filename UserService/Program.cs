@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using UserService.Data;
 using UserService.Repositories;
 using UserService.Services;
+using UserService.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -27,6 +28,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 

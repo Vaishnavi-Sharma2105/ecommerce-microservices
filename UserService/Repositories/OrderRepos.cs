@@ -21,5 +21,26 @@ namespace UserService.Repositories
         {
             return await _context.Orders.Where(o => o.UserId == id).ToListAsync(); 
         }
+        public async Task<Order?> GetById(int id)
+        {
+            return await _context.Orders.FindAsync(id);
+        }
+        public async Task UpdateOrder(Order order)
+        {
+            _context.Orders.Update(order);
+            await _context.SaveChangesAsync();
+        }
+        public async Task<bool> DeleteOrder(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null) return false;
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        public async Task<List<Order>> GetAllOrders()
+        {
+            return await _context.Orders.ToListAsync();
+        }
     }
 }

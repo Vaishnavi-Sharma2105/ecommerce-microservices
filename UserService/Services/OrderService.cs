@@ -39,5 +39,29 @@ namespace UserService.Services
                 TotalAmount = o.TotalAmount
             }).ToList();
         }
+        public async Task<bool> UpdateOrder(UpdateOrderDTO request, int id)
+        {
+            var order = await _repo.GetById(id);
+            if (order == null)
+                return false;
+            if(request.TotalAmount<=0)
+                return false;
+            order.TotalAmount = request.TotalAmount;
+
+            await _repo.UpdateOrder(order);
+
+            return true;
+        }
+
+        public async Task<bool> DeleteOrder(int id)
+        {
+            
+          return await _repo.DeleteOrder(id);
+
+        }
+        public async Task<List<Order>> GetAllOrders()
+        {
+            return await _repo.GetAllOrders();
+        }
     }
 }
